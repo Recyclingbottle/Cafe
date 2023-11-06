@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>주문 페이지</title>
+		<link rel="stylesheet" type="text/css" href="/css/order.css">
+	</head>
+	<body>
+		<h1>주문하기</h1>
+		<nav>
+			<ul>
+				<li><a href="/">메인</a></li>
+				<li><a href="/order/history">주문 내역</a></li>
+				<li><a href="/menu">메뉴</a></li>
+			</ul>
+		</nav>
+		<h2>메뉴</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>상품명</th>
+					<th>아이스/핫</th>
+					<th>카테고리</th>
+					<th>가격</th>
+					<th>동작</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% menu.forEach(item => { %>
+				<tr>
+					<td><%= item.no %></td>
+					<td><%= item.name %></td>
+					<td><%= item.ice_or_hot %></td>
+					<td><%= item.category %></td>
+					<td><%= item.price %>원</td>
+					<td>
+						<button
+							onclick="addToCart('<%= item.no %>', '<%= item.name %>', '<%= item.price %>')"
+						>
+							담기
+						</button>
+					</td>
+				</tr>
+				<% }); %>
+			</tbody>
+		</table>
+
+		<div id="cart">
+			<h2>장바구니</h2>
+			<label for="orderer">주문자 이름:</label>
+			<input type="text" id="orderer-name" placeholder="주문자 이름을 입력하세요" />
+			<ul id="cart-list"></ul>
+			<button id="cart-order-btn">주문하기</button>
+		</div>
+
+		<script src="/script/order.js"></script>
+	</body>
+</html>

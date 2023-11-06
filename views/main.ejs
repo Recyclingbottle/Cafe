@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 메뉴 관리</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <header>
+        <h1>카페 메뉴 관리</h1>		
+        <nav>
+            <ul>
+                <li><a href="/menu">메뉴</a></li>
+                <li><a href="/order/history">주문 내역</a></li>
+                <li><a href="/order">주문하기</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="slideshow-container">
+            <div class="slideshow">
+                <img src="/img/cafe_img01.jpg" alt="Image 1">
+                <img src="/img/cafe_img02.jpg" alt="Image 2">
+                <img src="/img/cafe_img03.jpg" alt="Image 3">
+                <img src="/img/cafe_img04.jpg" alt="Image 4">
+                <img src="/img/cafe_img05.jpg" alt="Image 5">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </main>
+    <script src ="script/main.js"></script>
+</body>
+</html>

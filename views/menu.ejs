@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="/css/menu.css">
+		<title>카페 메뉴 관리</title>
+		
+	</head>
+	<body>
+		<header>
+			<h1>카페 메뉴 관리</h1>
+			<nav>
+				<ul>
+					<li><a href="/">메인</a></li>
+					<li><a href="/order/history">주문 내역</a></li>
+					<li><a href="/order">주문하기</a></li>
+				</ul>
+			</nav>
+		</header>
+		<form action="/menu/search" method="POST">
+			<label for="searchOption">검색 옵션:</label>
+			<select id="searchOption" name="searchOption">
+				<option value="name">상품명</option>
+				<option value="created_by">작성자</option>
+				<option value="created_at">작성일</option>
+			</select>
+
+			<div id="searchField">
+				<!-- 선택한 검색 옵션에 따라 동적으로 입력 필드가 변경됩니다. -->
+			</div>
+
+			<input type="submit" value="검색" />
+		</form>
+		<button id="toggleAddForm">상품 추가</button>
+		<!-- 상품 추가 폼 토글 버튼 -->
+
+		<!-- 상품 추가 폼 -->
+		<div id="addProductForm" style="display: none;">
+			<h2>상품 추가</h2>
+			<form id="addProductForm" action="/menu/add" method="POST">
+				<label for="name">상품명:</label>
+				<input type="text" id="name" name="name" required /><br />
+
+				<label for="ice_or_hot">온도:</label>
+				<select id="ice_or_hot" name="ice_or_hot" required>
+					<option value="ice" selected>아이스</option>
+					<option value="hot">핫</option> </select
+				><br />
+
+				<label for="category">카테고리:</label>
+				<select id="category" name="category" required>
+					<option value="아메리카노">아메리카노</option>
+					<option value="카페라떼">카페라떼</option>
+					<option value="에이드" selected>에이드</option>
+					<option value="스무디">스무디</option>
+					<option value="프라푸치노">프라푸치노</option> </select
+				><br />
+
+				<label for="price">가격:</label>
+				<input type="number" id="price" name="price" required /><br />
+
+				<label for="created_by">등록자:</label>
+				<input type="text" id="created_by" name="created_by" required /><br />
+
+				<input type="submit" value="추가" />
+				<button type="button" id="cancelAdd">취소</button>
+			</form>
+		</div>
+		<!-- 상품 수정 폼 -->
+		<div id="editProductForm" style="display: none;">
+			<!-- 상품 수정 폼 내용 -->
+			<h2>상품 수정</h2>
+			<form id="editForm">
+				<label for="editName">상품명:</label>
+				<input type="text" id="editName" name="name" required /><br />
+
+				<label for="editIceOrHot">온도:</label>
+				<select id="editIceOrHot" name="ice_or_hot" required>
+					<option value="ice" selected>아이스</option>
+					<option value="hot">핫</option> </select
+				><br />
+
+				<label for="editCategory">카테고리:</label>
+				<select id="editCategory" name="category" required>
+					<option value="아메리카노">아메리카노</option>
+					<option value="카페라떼">카페라떼</option>
+					<option value="에이드" selected>에이드</option>
+					<option value="스무디">스무디</option>
+					<option value="프라푸치노">프라푸치노</option> </select
+				><br />
+
+				<label for="editPrice">가격:</label>
+				<input type="number" id="editPrice" name="price" required /><br />
+
+				<label for="editCreatedBy">등록자:</label>
+				<input type="text" id="editCreatedBy" name="created_by" required /><br />
+				<input type="submit" value="수정" />
+				<!-- 취소 버튼 추가 -->
+        		<button type="button" id="cancelEdit">취소</button>
+			</form>
+		</div>
+
+		<main>
+			<h2>상품 목록</h2>
+			<ul>
+				<% for (let product of products) { %>
+				<li>
+					<p><strong><%= product.name %></strong></p>
+					<p>가격: <%= product.price %>원</p>
+					<p>카테고리: <%= product.category %></p>
+					<p>온도: <%= product.ice_or_hot %></p>
+					<p>등록자: <%= product.created_by %></p>
+					<p>등록일: <%= new Date(product.created_at).toLocaleDateString() %></p>
+					<button data-product-id="<%= product.no %>" class="edit-button">수정</button>
+					<button data-product-id="<%= product.no %>" class="delete-button">삭제</button>
+				</li>
+				<% } %>
+			</ul>
+		</main>
+		<script src="/script/menu.js"></script>
+	</body>
+</html>
